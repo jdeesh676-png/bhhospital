@@ -69,6 +69,10 @@ header{
   backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.15);
   background:rgba(0,0,0,.45);
+  transition: top .3s ease-in-out;
+}
+.hidden-header{
+  top:-90px;
 }
 
 .navbar{
@@ -530,7 +534,23 @@ function addMsg(text){
   messages.appendChild(msg);
   messages.scrollTop = messages.scrollHeight;
 }
+let lastScroll = 0;
+let header = document.querySelector("header");
 
+window.addEventListener("scroll", () => {
+
+  let currentScroll = window.scrollY;
+
+  if(currentScroll > lastScroll){
+      // scrolling down → hide header
+      header.classList.add("hidden-header");
+  } else {
+      // scrolling up → show header
+      header.classList.remove("hidden-header");
+  }
+
+  lastScroll = currentScroll;
+});
 </script>
 
 </body>
