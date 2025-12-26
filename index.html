@@ -50,12 +50,27 @@ section{
 /* -------- GLASS BLOCKS -------- */
 
 .glass{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:18px;
-  padding:22px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 26px rgba(255,0,120,.4);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.05)
+  );
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:22px;
+  padding:24px;
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.35),
+    0 0 18px rgba(255,0,112,.35);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.glass:hover{
+  transform: translateY(-4px);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.45),
+    0 0 22px rgba(255,0,112,.45);
 }
 
 /* -------- HEADER -------- */
@@ -269,7 +284,25 @@ input, textarea{
   .grid{grid-template-columns:1fr;}
   .form-grid{grid-template-columns:1fr;}
 }
+/* base hidden state */
+.reveal{
+  opacity:0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
 
+/* visible after scrolling */
+.reveal.show{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* stagger sequence */
+.stagger:nth-child(1){ transition-delay:.05s; }
+.stagger:nth-child(2){ transition-delay:.15s; }
+.stagger:nth-child(3){ transition-delay:.25s; }
+.stagger:nth-child(4){ transition-delay:.35s; }
+.stagger:nth-child(5){ transition-delay:.45s; }
 </style>
 </head>
 
@@ -296,7 +329,7 @@ input, textarea{
 
 
 <!-- HERO -->
-<section id="home" class="hero">
+<section id="home" class="hero reveal">
   <div class="container glass neon-bg">
     <h1>Gynecology • Maternity • Women Care</h1>
     <p>Compassionate care through every stage of womanhood.</p>
@@ -309,7 +342,7 @@ input, textarea{
 
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="reveal">
   <div class="container glass">
     <h2>About Bhaskar Reddy Hospitals</h2>
     <p>Replace this text with your real hospital details later.</p>
@@ -319,23 +352,23 @@ input, textarea{
 
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" class="reveal">
   <div class="container">
     <h2>Women Care Services</h2>
 
     <div class="grid">
 
-      <div class="glass card">
+      <div class="glass card reveal stagger">
         <h3>Maternity & Pregnancy Care</h3>
         <p>Placeholder text — editable.</p>
       </div>
 
-      <div class="glass card">
+      <div class="glass card reveal stagger">
         <h3>Gynecology Consultation</h3>
         <p>Reproductive health support.</p>
       </div>
 
-      <div class="glass card">
+      <div class="glass card reveal stagger">
         <h3>Fertility & Wellness</h3>
         <p>Assessment & counselling.</p>
       </div>
@@ -347,25 +380,25 @@ input, textarea{
 
 
 <!-- DOCTORS -->
-<section id="doctors">
+<section id="doctors" class="reveal">
   <div class="container">
     <h2>Our Specialists</h2>
 
     <div class="grid">
 
-      <div class="glass card" onclick="openDoctor('Gynecology Specialist','Women Health & Obstetrics')">
+      <div class="glass card reveal stagger"> onclick="openDoctor('Gynecology Specialist','Women Health & Obstetrics')">
         <div class="avatar"></div>
         <h3>Gynecology Specialist</h3>
         <p>Tap to view profile</p>
       </div>
 
-      <div class="glass card" onclick="openDoctor('Senior Obstetrician','Pregnancy & Delivery Care')">
+      <div class="glass card reveal stagger"> onclick="openDoctor('Senior Obstetrician','Pregnancy & Delivery Care')">
         <div class="avatar"></div>
         <h3>Senior Obstetrician</h3>
         <p>Tap to view profile</p>
       </div>
 
-      <div class="glass card" onclick="openDoctor('Fertility Consultant','Women Wellness & Fertility')">
+      <div class="glass card reveal stagger"> onclick="openDoctor('Fertility Consultant','Women Wellness & Fertility')">
         <div class="avatar"></div>
         <h3>Fertility Consultant</h3>
         <p>Tap to view profile</p>
@@ -378,7 +411,7 @@ input, textarea{
 
 
 <!-- APPOINTMENT -->
-<section id="appointment">
+<section id="appointment" class="reveal">
   <div class="container glass neon-bg">
     <h2>Appointment Request</h2>
 
@@ -396,7 +429,7 @@ input, textarea{
 
   </div>
 </section>
-<section id="callback">
+<section id="callback" class="reveal">
   <div class="container glass" style="display:flex;align-items:center;gap:20px; flex-wrap:wrap;">
 
     <div style="flex:1;min-width:300px;">
@@ -551,6 +584,20 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll;
 });
+  const elements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+(entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},
+{ threshold:0.2 }
+);
+
+elements.forEach(el => observer.observe(el));
 </script>
 
 </body>
