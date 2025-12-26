@@ -251,4 +251,117 @@ input, textarea{
     <div class="grid">
 
       <div class="glass card">
-        <h3>Maternity & Pregnancy Care
+        <h3>Maternity & Pregnancy Care</h3>
+        <p>Replace with actual content later.</p>
+      </div>
+
+      <div class="glass card">
+        <h3>Gynecology Consultation</h3>
+        <p>Women's reproductive health care.</p>
+      </div>
+
+      <div class="glass card">
+        <h3>Fertility & Wellness</h3>
+        <p>Assessment & counselling support.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- DOCTORS -->
+<section id="doctors">
+  <div class="container">
+    <h2>Our Specialists</h2>
+
+    <div class="grid">
+
+      <div class="glass card">
+        <div class="avatar"></div>
+        <h3>Gynecology Specialist</h3>
+        <p>Add profile details later.</p>
+      </div>
+
+      <div class="glass card">
+        <div class="avatar"></div>
+        <h3>Senior Obstetrician</h3>
+        <p>Pregnancy & maternity care.</p>
+      </div>
+
+      <div class="glass card">
+        <div class="avatar"></div>
+        <h3>Fertility Consultant</h3>
+        <p>Women wellness care.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- APPOINTMENT -->
+<section id="appointment">
+  <div class="container glass">
+    <h2>Appointment Request</h2>
+
+    <div class="form-grid">
+      <input type="text" placeholder="Patient Name">
+      <input type="text" placeholder="Contact Number">
+      <input type="text" placeholder="Consultation Type">
+      <input type="date">
+    </div>
+
+    <textarea rows="4" placeholder="Additional Notes"></textarea>
+
+    <a class="btn">Submit Request</a>
+  </div>
+</section>
+
+
+<!-- CHATBOT -->
+<div class="chat-window" id="chatWindow">
+  <div class="glass chat-box">
+
+    <div class="chat-messages" id="messages"></div>
+
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Type your message">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+</div>
+
+<button class="chatbot-btn" onclick="toggleChat()">💬</button>
+
+
+<script>
+
+function toggleChat(){
+  let box = document.getElementById("chatWindow");
+  box.style.display = (box.style.display === "block") ? "none" : "block";
+}
+
+function sendMessage(){
+  let input = document.getElementById("chatInput");
+  let messages = document.getElementById("messages");
+
+  if(!input.value.trim()) return;
+
+  let msg = document.createElement("p");
+  msg.innerHTML = "🧑‍⚕️ You: " + input.value;
+  messages.appendChild(msg);
+
+  let bot = document.createElement("p");
+  bot.innerHTML = "🤖 Bot: Thank you — hospital team will contact you.";
+  messages.appendChild(bot);
+
+  input.value = "";
+  messages.scrollTop = messages.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
