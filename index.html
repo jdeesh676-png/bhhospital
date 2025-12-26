@@ -7,7 +7,7 @@
 
 <style>
 
-/* ------------------- GLOBAL ------------------- */
+/* -------- GLOBAL -------- */
 
 *{
   margin:0;
@@ -19,7 +19,8 @@
 body{
   background:#06060a;
   color:#f5f5f5;
-  overflow:hidden; /* hide scroll */
+  overflow-y:auto; /* scrolling enabled */
+  scroll-behavior:smooth;
 }
 
 .container{
@@ -28,17 +29,22 @@ body{
   margin:auto;
 }
 
-/* ------------------- GLASS NEON STYLE ------------------- */
+section{
+  padding:90px 0;
+}
+
+/* -------- GLASS NEON -------- */
 
 .glass{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.18);
   border-radius:18px;
-  backdrop-filter:blur(12px);
-  box-shadow:0 0 20px rgba(255,0,120,.25);
+  padding:22px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 26px rgba(255,0,120,.28);
 }
 
-/* ------------------- HEADER ------------------- */
+/* -------- HEADER -------- */
 
 header{
   position:fixed;
@@ -46,7 +52,9 @@ header{
   width:100%;
   padding:14px 0;
   z-index:20;
+  backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,.45);
 }
 
 .navbar{
@@ -59,7 +67,7 @@ header{
   font-size:20px;
   font-weight:700;
   color:#ff5ca8;
-  text-shadow:0 0 10px #ff3f9c;
+  text-shadow:0 0 12px #ff3f9c;
 }
 
 .nav{
@@ -67,40 +75,35 @@ header{
   gap:12px;
 }
 
-.nav button{
+.nav a{
   padding:8px 14px;
   border-radius:10px;
-  border:none;
-  cursor:pointer;
+  text-decoration:none;
   background:rgba(255,255,255,.1);
   color:#fff;
 }
 
-.nav button:hover{
+.nav a:hover{
   background:#ff2f7d;
 }
 
-/* ------------------- HERO ------------------- */
+/* -------- HERO -------- */
 
 .hero{
-  height:100vh;
+  min-height:100vh;
   display:flex;
   align-items:center;
 }
 
-.hero-box{
-  padding:26px;
-}
-
 .hero h1{
   font-size:34px;
-  color:#ff7dbd;
-  text-shadow:0 0 12px #ff3fa0;
+  color:#ff8bcd;
+  text-shadow:0 0 14px #ff3fa0;
 }
 
 .hero p{
-  margin-top:8px;
-  color:#cfcfcf;
+  margin-top:6px;
+  color:#d6d6d6;
 }
 
 .btn{
@@ -113,45 +116,17 @@ header{
   text-decoration:none;
 }
 
-/* ------------------- POPUP MODALS ------------------- */
-
-.modal{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,.7);
-  z-index:50;
-}
-
-.modal-content{
-  width:80%;
-  max-width:900px;
-  padding:20px;
-}
-
-.close{
-  float:right;
-  font-size:20px;
-  cursor:pointer;
-  color:#ff86c7;
-}
-
-/* ------------------- GRID CARDS ------------------- */
+/* -------- GRID CARDS -------- */
 
 .grid{
-  margin-top:12px;
+  margin-top:16px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:14px;
 }
 
 .card{
-  padding:14px;
+  padding:16px;
 }
 
 .avatar{
@@ -162,7 +137,7 @@ header{
   margin-bottom:8px;
 }
 
-/* ------------------- APPOINTMENT FORM ------------------- */
+/* -------- APPOINTMENT FORM -------- */
 
 .form-grid{
   display:grid;
@@ -178,7 +153,7 @@ input, textarea{
   color:#fff;
 }
 
-/* ------------------- CHATBOT ------------------- */
+/* -------- CHATBOT -------- */
 
 .chatbot-btn{
   position:fixed;
@@ -190,7 +165,7 @@ input, textarea{
   color:#fff;
   border:none;
   cursor:pointer;
-  box-shadow:0 0 12px #ff3f9c;
+  box-shadow:0 0 14px #ff3f9c;
 }
 
 .chat-window{
@@ -220,7 +195,7 @@ input, textarea{
   flex:1;
 }
 
-/* ------------------- RESPONSIVE ------------------- */
+/* -------- RESPONSIVE -------- */
 
 @media(max-width:768px){
   .grid{grid-template-columns:1fr;}
@@ -232,182 +207,48 @@ input, textarea{
 
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="container navbar">
     <div class="logo">Bhaskar Reddy Hospitals</div>
 
     <nav class="nav">
-      <button onclick="openModal('aboutModal')">About</button>
-      <button onclick="openModal('servicesModal')">Services</button>
-      <button onclick="openModal('doctorsModal')">Doctors</button>
-      <button onclick="openModal('appointmentModal')">Appointment</button>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#appointment">Appointment</a>
     </nav>
   </div>
 </header>
 
 
-<section class="hero">
-  <div class="container glass hero-box">
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container glass">
     <h1>Gynecology • Maternity • Women Care</h1>
     <p>Compassionate care through every stage of womanhood.</p>
 
-    <a class="btn" onclick="openModal('appointmentModal')">Book Appointment</a>
+    <a class="btn" href="#appointment">Book Appointment</a>
   </div>
 </section>
 
 
-<!-- ------------------- ABOUT POPUP ------------------- -->
-
-<div class="modal" id="aboutModal">
-  <div class="glass modal-content">
-    <span class="close" onclick="closeModal('aboutModal')">✕</span>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container glass">
     <h2>About Bhaskar Reddy Hospitals</h2>
-    <p>UI placeholder — you can add your real hospital details here.</p>
+    <p>This is a UI placeholder — you can add real hospital details later.</p>
   </div>
-</div>
+</section>
 
 
-<!-- ------------------- SERVICES POPUP ------------------- -->
-
-<div class="modal" id="servicesModal">
-  <div class="glass modal-content">
-    <span class="close" onclick="closeModal('servicesModal')">✕</span>
-
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
     <h2>Women Care Services</h2>
 
     <div class="grid">
 
       <div class="glass card">
-        <h3>Maternity & Pregnancy Care</h3>
-        <p>Replace with actual details later</p>
-      </div>
-
-      <div class="glass card">
-        <h3>Gynecology Consultation</h3>
-        <p>Women reproductive care</p>
-      </div>
-
-      <div class="glass card">
-        <h3>Fertility & Wellness</h3>
-        <p>Counselling & assessment</p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ------------------- DOCTORS POPUP ------------------- -->
-
-<div class="modal" id="doctorsModal">
-  <div class="glass modal-content">
-    <span class="close" onclick="closeModal('doctorsModal')">✕</span>
-
-    <h2>Our Specialists</h2>
-
-    <div class="grid">
-
-      <div class="glass card">
-        <div class="avatar"></div>
-        <h3>Gynecology Specialist</h3>
-        <p>Add doctor details later</p>
-      </div>
-
-      <div class="glass card">
-        <div class="avatar"></div>
-        <h3>Senior Obstetrician</h3>
-        <p>Pregnancy & Maternity</p>
-      </div>
-
-      <div class="glass card">
-        <div class="avatar"></div>
-        <h3>Fertility Consultant</h3>
-        <p>Women Wellness Care</p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ------------------- APPOINTMENT FORM POPUP ------------------- -->
-
-<div class="modal" id="appointmentModal">
-  <div class="glass modal-content">
-    <span class="close" onclick="closeModal('appointmentModal')">✕</span>
-
-    <h2>Appointment Request</h2>
-
-    <div class="form-grid">
-      <input type="text" placeholder="Patient Name">
-      <input type="text" placeholder="Contact Number">
-      <input type="text" placeholder="Consultation Type">
-      <input type="date">
-    </div>
-
-    <textarea rows="4" placeholder="Additional Notes"></textarea>
-
-    <a class="btn">Submit Request</a>
-  </div>
-</div>
-
-
-<!-- ------------------- CHATBOT ------------------- -->
-
-<div class="chat-window" id="chatWindow">
-  <div class="glass chat-box">
-
-    <div class="chat-messages" id="messages"></div>
-
-    <div class="chat-input">
-      <input id="chatInput" placeholder="Type your message">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-
-  </div>
-</div>
-
-<button class="chatbot-btn" onclick="toggleChat()">💬</button>
-
-
-<script>
-
-/* -------- MODAL CONTROL -------- */
-
-function openModal(id){
-  document.getElementById(id).style.display = "flex";
-}
-
-function closeModal(id){
-  document.getElementById(id).style.display = "none";
-}
-
-/* -------- CHATBOT UI (Simple Placeholder) -------- */
-
-function toggleChat(){
-  let box = document.getElementById("chatWindow");
-  box.style.display = (box.style.display === "block") ? "none" : "block";
-}
-
-function sendMessage(){
-  let input = document.getElementById("chatInput");
-  let messages = document.getElementById("messages");
-
-  if(!input.value.trim()) return;
-
-  let msg = document.createElement("p");
-  msg.innerHTML = "🧑‍⚕️ You: " + input.value;
-  messages.appendChild(msg);
-
-  let bot = document.createElement("p");
-  bot.innerHTML = "🤖 Bot: Thank you — hospital team will contact you.";
-  messages.appendChild(bot);
-
-  input.value = "";
-  messages.scrollTop = messages.scrollHeight;
-}
-
-</script>
-
-</body>
-</html>
+        <h3>Maternity & Pregnancy Care
