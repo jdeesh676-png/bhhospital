@@ -17,9 +17,9 @@
 }
 
 body{
-  background:#06060a;
+  background:#05050a;
   color:#f5f5f5;
-  overflow-y:auto; /* scrolling enabled */
+  overflow-y:auto;
   scroll-behavior:smooth;
 }
 
@@ -30,10 +30,24 @@ body{
 }
 
 section{
-  padding:90px 0;
+  padding:95px 0;
 }
 
-/* -------- GLASS NEON -------- */
+/* -------- NEON GRADIENT ANIMATION -------- */
+
+.neon-bg{
+  background:linear-gradient(120deg,#ff3f9c,#3fa9ff,#ff79c9);
+  background-size:300% 300%;
+  animation:neonShift 8s infinite linear;
+}
+
+@keyframes neonShift{
+  0%{background-position:0 0;}
+  50%{background-position:100% 100%;}
+  100%{background-position:0 0;}
+}
+
+/* -------- GLASS BLOCKS -------- */
 
 .glass{
   background:rgba(255,255,255,.08);
@@ -41,7 +55,7 @@ section{
   border-radius:18px;
   padding:22px;
   backdrop-filter:blur(10px);
-  box-shadow:0 0 26px rgba(255,0,120,.28);
+  box-shadow:0 0 26px rgba(255,0,120,.4);
 }
 
 /* -------- HEADER -------- */
@@ -51,7 +65,7 @@ header{
   top:0;
   width:100%;
   padding:14px 0;
-  z-index:20;
+  z-index:30;
   backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.15);
   background:rgba(0,0,0,.45);
@@ -66,8 +80,8 @@ header{
 .logo{
   font-size:20px;
   font-weight:700;
-  color:#ff5ca8;
-  text-shadow:0 0 12px #ff3f9c;
+  color:#ff79cd;
+  text-shadow:0 0 12px #ff3faa;
 }
 
 .nav{
@@ -87,24 +101,7 @@ header{
   background:#ff2f7d;
 }
 
-/* -------- HERO -------- */
-
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-}
-
-.hero h1{
-  font-size:34px;
-  color:#ff8bcd;
-  text-shadow:0 0 14px #ff3fa0;
-}
-
-.hero p{
-  margin-top:6px;
-  color:#d6d6d6;
-}
+/* -------- BUTTONS -------- */
 
 .btn{
   display:inline-block;
@@ -116,7 +113,23 @@ header{
   text-decoration:none;
 }
 
-/* -------- GRID CARDS -------- */
+.btn.blue{
+  background:#3f9cff;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+/* -------- HERO -------- */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+
+/* -------- GRID -------- */
 
 .grid{
   margin-top:16px;
@@ -127,17 +140,18 @@ header{
 
 .card{
   padding:16px;
+  cursor:pointer;
 }
 
 .avatar{
   width:80px;
   height:80px;
   border-radius:50%;
-  background:#1c1c22;
+  background:#1d1d25;
   margin-bottom:8px;
 }
 
-/* -------- APPOINTMENT FORM -------- */
+/* -------- FORM -------- */
 
 .form-grid{
   display:grid;
@@ -148,9 +162,36 @@ header{
 input, textarea{
   padding:10px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.25);
   background:#0c0c12;
   color:#fff;
+}
+
+/* -------- DOCTOR POPUP -------- */
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.8);
+  z-index:50;
+}
+
+.modal-box{
+  width:80%;
+  max-width:700px;
+  padding:18px;
+}
+
+.close{
+  float:right;
+  cursor:pointer;
+  color:#ffa6db;
 }
 
 /* -------- CHATBOT -------- */
@@ -165,7 +206,7 @@ input, textarea{
   color:#fff;
   border:none;
   cursor:pointer;
-  box-shadow:0 0 14px #ff3f9c;
+  box-shadow:0 0 14px #ff3fa0;
 }
 
 .chat-window{
@@ -195,6 +236,29 @@ input, textarea{
   flex:1;
 }
 
+/* -------- FLOATING BUTTONS -------- */
+
+.fab-panel{
+  position:fixed;
+  left:18px;
+  bottom:18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.fab{
+  padding:12px 16px;
+  border-radius:20px;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(0,0,0,.4);
+}
+
+.call-btn{background:#ff3366;}
+.whatsapp-btn{background:#25D366;}
+
 /* -------- RESPONSIVE -------- */
 
 @media(max-width:768px){
@@ -207,9 +271,11 @@ input, textarea{
 
 <body>
 
+
 <!-- HEADER -->
 <header>
   <div class="container navbar">
+
     <div class="logo">Bhaskar Reddy Hospitals</div>
 
     <nav class="nav">
@@ -219,28 +285,33 @@ input, textarea{
       <a href="#doctors">Doctors</a>
       <a href="#appointment">Appointment</a>
     </nav>
+
   </div>
 </header>
 
 
+
 <!-- HERO -->
 <section id="home" class="hero">
-  <div class="container glass">
+  <div class="container glass neon-bg">
     <h1>Gynecology • Maternity • Women Care</h1>
     <p>Compassionate care through every stage of womanhood.</p>
 
     <a class="btn" href="#appointment">Book Appointment</a>
+    <a class="btn blue" href="#services">View Services</a>
   </div>
 </section>
+
 
 
 <!-- ABOUT -->
 <section id="about">
   <div class="container glass">
     <h2>About Bhaskar Reddy Hospitals</h2>
-    <p>This is a UI placeholder — you can add real hospital details later.</p>
+    <p>Replace this text with your real hospital details later.</p>
   </div>
 </section>
+
 
 
 <!-- SERVICES -->
@@ -252,22 +323,23 @@ input, textarea{
 
       <div class="glass card">
         <h3>Maternity & Pregnancy Care</h3>
-        <p>Replace with actual content later.</p>
+        <p>Placeholder text — editable.</p>
       </div>
 
       <div class="glass card">
         <h3>Gynecology Consultation</h3>
-        <p>Women's reproductive health care.</p>
+        <p>Reproductive health support.</p>
       </div>
 
       <div class="glass card">
         <h3>Fertility & Wellness</h3>
-        <p>Assessment & counselling support.</p>
+        <p>Assessment & counselling.</p>
       </div>
 
     </div>
   </div>
 </section>
+
 
 
 <!-- DOCTORS -->
@@ -277,22 +349,22 @@ input, textarea{
 
     <div class="grid">
 
-      <div class="glass card">
+      <div class="glass card" onclick="openDoctor('Gynecology Specialist','Women Health & Obstetrics')">
         <div class="avatar"></div>
         <h3>Gynecology Specialist</h3>
-        <p>Add profile details later.</p>
+        <p>Tap to view profile</p>
       </div>
 
-      <div class="glass card">
+      <div class="glass card" onclick="openDoctor('Senior Obstetrician','Pregnancy & Delivery Care')">
         <div class="avatar"></div>
         <h3>Senior Obstetrician</h3>
-        <p>Pregnancy & maternity care.</p>
+        <p>Tap to view profile</p>
       </div>
 
-      <div class="glass card">
+      <div class="glass card" onclick="openDoctor('Fertility Consultant','Women Wellness & Fertility')">
         <div class="avatar"></div>
         <h3>Fertility Consultant</h3>
-        <p>Women wellness care.</p>
+        <p>Tap to view profile</p>
       </div>
 
     </div>
@@ -300,9 +372,10 @@ input, textarea{
 </section>
 
 
+
 <!-- APPOINTMENT -->
 <section id="appointment">
-  <div class="container glass">
+  <div class="container glass neon-bg">
     <h2>Appointment Request</h2>
 
     <div class="form-grid">
@@ -315,8 +388,23 @@ input, textarea{
     <textarea rows="4" placeholder="Additional Notes"></textarea>
 
     <a class="btn">Submit Request</a>
+    <a class="btn blue">Save & Continue</a>
+
   </div>
 </section>
+
+
+
+<!-- DOCTOR POPUP -->
+<div class="modal" id="doctorModal">
+  <div class="glass modal-box">
+    <span class="close" onclick="closeDoctor()">✕</span>
+    <h2 id="docName"></h2>
+    <p id="docSpec"></p>
+    <p>UI placeholder — add full biography later.</p>
+  </div>
+</div>
+
 
 
 <!-- CHATBOT -->
@@ -326,7 +414,7 @@ input, textarea{
     <div class="chat-messages" id="messages"></div>
 
     <div class="chat-input">
-      <input id="chatInput" placeholder="Type your message">
+      <input id="chatInput" placeholder="Ask something...">
       <button onclick="sendMessage()">Send</button>
     </div>
 
@@ -336,7 +424,39 @@ input, textarea{
 <button class="chatbot-btn" onclick="toggleChat()">💬</button>
 
 
+
+<!-- FLOATING ACTION BUTTONS -->
+<div class="fab-panel">
+
+  <button class="fab call-btn" onclick="window.location.href='tel:+919999999999'">
+    📞 Emergency Call
+  </button>
+
+  <button class="fab whatsapp-btn"
+    onclick="window.location.href='https://wa.me/919999999999?text=I%20want%20an%20appointment'">
+    💬 WhatsApp Appointment
+  </button>
+
+</div>
+
+
+
 <script>
+
+/* ------- DOCTOR POPUP ------- */
+
+function openDoctor(name,spec){
+  document.getElementById("docName").innerText = name;
+  document.getElementById("docSpec").innerText = spec;
+  document.getElementById("doctorModal").style.display="flex";
+}
+
+function closeDoctor(){
+  document.getElementById("doctorModal").style.display="none";
+}
+
+
+/* ------- CHATBOT UI + AUTO REPLY ------- */
 
 function toggleChat(){
   let box = document.getElementById("chatWindow");
@@ -349,15 +469,20 @@ function sendMessage(){
 
   if(!input.value.trim()) return;
 
-  let msg = document.createElement("p");
-  msg.innerHTML = "🧑‍⚕️ You: " + input.value;
-  messages.appendChild(msg);
+  addMsg("🧑‍⚕️ You: " + input.value);
 
-  let bot = document.createElement("p");
-  bot.innerHTML = "🤖 Bot: Thank you — hospital team will contact you.";
-  messages.appendChild(bot);
+  setTimeout(()=>{
+    addMsg("Thank you — our team will contact you shortly.");
+  },500);
 
   input.value = "";
+}
+
+function addMsg(text){
+  let messages = document.getElementById("messages");
+  let msg = document.createElement("p");
+  msg.innerHTML = text;
+  messages.appendChild(msg);
   messages.scrollTop = messages.scrollHeight;
 }
 
